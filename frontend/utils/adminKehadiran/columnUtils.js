@@ -39,7 +39,7 @@ export const generateColumnDefs = (crewOptions, daysArray, selectedMonth) => {
         </div>
       )
     },
-    { field: "namaTeknisi", editable: false, pinned: 'left' },
+    { field: "namaTeknisi", editable: false, filter: true, pinned: 'left' },
     ...daysArray.map(day => ({
       field: `day${day}`,
       headerName: `${day}`,

@@ -10,7 +10,6 @@ const getSektor = require('./endpoint/sektor/getSektor');
 const getKehadiran = require('./endpoint/kehadiran/getKehadiran');
 const getAdminKehadiran = require('./endpoint/kehadiran/getAdminKehadiran')
 const postAdminKehadiran = require('./endpoint/kehadiran/postAdminKehadiran')
-const postKehadiran = require('./endpoint/kehadiran/postKehadiran');
 const deleteKehadiran = require('./endpoint/kehadiran/deleteKehadiran');
 const getTeknisiID = require('./endpoint/teknisi/getTeknisiID');
 const getKehadiranTele = require('./endpoint/kehadiran/getKehadiranTele');
@@ -41,10 +40,9 @@ app.post('/teknisi', postTeknisi(db));
 app.delete('/teknisi/:id', deleteTeknisiByID(db));
 app.get('/sektor', getSektor(db));
 app.get('/kehadiran', getKehadiran(db));
-app.post('/kehadiran', postKehadiran(db));
 app.get('/admin-kehadiran', getAdminKehadiran(db));
-app.post('/admin-kehadiran', postAdminKehadiran(db)); // Tambahkan ini
-app.delete('/kehadiran', deleteKehadiran(db));
+app.post('/admin-kehadiran', postAdminKehadiran(db));
+app.post('/kehadiran/delete', deleteKehadiran(db));
 app.get('/teknisi/:id', getTeknisiID(db));
 app.get('/kehadiran/:sektor/:date', getKehadiranTele(db));
 app.get('/crew', getCrew(db));

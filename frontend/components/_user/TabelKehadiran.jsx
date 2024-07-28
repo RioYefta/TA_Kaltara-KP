@@ -8,10 +8,6 @@ import { useKehadiranData } from '../../hooks/useKehadiranData';
 import { processData } from '../../utils/userKehadiran/dataUtils';
 import { generateColDefs } from '../../utils/userKehadiran/columnUtils';
 
-const pagination = true;
-const paginationPageSize = 15;
-const paginationPageSizeSelector = [25, 50, 100];
-
 function TabelKehadiran({ selectedMonth = moment().format('YYYY-MM'), selectedSektor, selectedIdTeknisi }) {
   const { data, error } = useKehadiranData();
   const [filteredData, setFilteredData] = useState([]);
@@ -42,9 +38,9 @@ function TabelKehadiran({ selectedMonth = moment().format('YYYY-MM'), selectedSe
           rowData={rowData}
           columnDefs={colDefs}
           defaultColDef={{ editable: false }}
-          pagination={pagination}
-          paginationPageSize={paginationPageSize}
-          paginationPageSizeSelector={paginationPageSizeSelector}
+          pagination
+          paginationPageSize = {15}
+          paginationPageSizeSelector = {[25, 50, 100]}
         />
       </div>
     </div>

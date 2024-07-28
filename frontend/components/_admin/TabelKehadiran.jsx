@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useKehadiranData } from '../../hooks/useKehadiranData';
 import { daysInMonth, formatDate } from '../../utils/adminKehadiran/dateUtils'; // Impor formatDate di sini
 import { generateColumnDefs } from '../../utils/adminKehadiran/columnUtils';
-import { updateKehadiranData } from '../../services/kehadiranService'; // Impor updateKehadiranData di sini
+import { updateKehadiranData, deleteKehadiranData } from '../../services/kehadiranService'; // Impor updateKehadiranData di sini
 
 function TabelKehadiran({ tabelKehadiran, selectedMonth = moment().format('YYYY-MM'), selectedSektor, selectedIdTeknisi }) {
   const { data, filteredData, crewOptions, error } = useKehadiranData(selectedMonth, selectedSektor, selectedIdTeknisi);
@@ -40,10 +40,20 @@ function TabelKehadiran({ tabelKehadiran, selectedMonth = moment().format('YYYY-
     const id = data.idTeknisi;
     const day = field.replace('day', '');
     const date = formatDate(`${selectedMonth}-${day}`, 'YYYY-MM-DD');
-    updateKehadiranData(id, date, field.startsWith('day') ? 'status' : 'crew', newValue)
-      .then(() => toast.success('Update successful'))
-      .catch(error => toast.error('Error updating data'));
+  
+    if (newValue === null || newValue === "") {
+      deleteKehadiranData(id, date)
+        .then(() => toast.success('Data kehadiran berhasil dihapus'))
+        .catch(error => toast.error('Error deleting data'));
+    } else {
+      updateKehadiranData(id, date, 'status', newValue)
+        .then(() => toast.success('Update successful'))
+        .catch(error => toast.error('Error updating data'));
+    }
   };
+
+  
+  
 
   if (error) return <div>Error: {error}</div>;
 

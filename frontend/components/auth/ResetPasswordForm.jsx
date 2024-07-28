@@ -2,23 +2,32 @@ import { useRouter } from 'next/navigation';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config'; // Import Firestore
+import { collection, query, where, getDocs } from 'firebase/firestore'; // Firestore functions
 
 const ResetPasswordForm = () => {
     const router = useRouter();
 
-    const handleResetPassword = (e) => {
+    const handleResetPassword = async (e) => {
         e.preventDefault();
         const emailInput = e.target.email;
         if (emailInput) {
             const emailVal = emailInput.value;
-            sendPasswordResetEmail(auth, emailVal)
-                .then(() => {
+            try {
+                // Check if email exists in Firestore
+                const usersRef = collection(db, 'users'); // Adjust the collection name as per your setup
+                const q = query(usersRef, where('email', '==', emailVal));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    toast.error("Email belum terdaftar.");
+                } else {
+                    await sendPasswordResetEmail(auth, emailVal);
                     toast.success("Cek email anda!");
-                })
-                .catch((err) => {
-                    toast.error(`Error: ${err.code}`);
-                });
+                }
+            } catch (err) {
+                toast.error(`Error: ${err.message}`);
+            }
         } else {
             toast.error("Email input not found");
         }

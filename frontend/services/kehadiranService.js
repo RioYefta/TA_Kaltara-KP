@@ -39,3 +39,14 @@ export const updateKehadiranData = async (idTeknisi, date, field, newValue) => {
         throw error;
     }
 };
+
+export const deleteKehadiranData = async (idTeknisi, date) => {
+    try {
+        await axios.post(`${API_ENDPOINTS.DELETE}`, {
+            idTeknisi, date
+        });
+    } catch (error) {
+        console.error('Error deleting attendance data:', error);
+        throw error;
+    }
+};
