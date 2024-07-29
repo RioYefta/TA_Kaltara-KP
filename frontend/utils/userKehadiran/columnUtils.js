@@ -20,14 +20,26 @@ const reverseStatusMap = {
   'SKT': 'SAKIT'
 };
 
+export const statusColors = {
+  'PAGI': '#ADFF2F',  // Gold
+  'SIANG': '#ADFF2F', // Green Yellow
+  'MALAM': '#1E90FF', // Dodger Blue
+  'OFF': '#D3D3D3',   // Light Gray
+  'IZIN': '#FFA500',  // Orange
+  'CUTI': '#FF4500',  // Orange Red
+  'SAKIT': '#FF0000'  // Red
+};
+
 export const generateColDefs = (selectedMonth) => {
   const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
   const numberOfDays = daysInMonth(moment(selectedMonth).year(), moment(selectedMonth).month());
   const daysArrays = Array.from({ length: numberOfDays }, (_, i) => i + 1);
+  const today = moment().date();
+  const isCurrentMonth = moment().isSame(selectedMonth, 'month');
 
   return [
-    { field: "sektor", pinned: 'left' },
-    { field: "crew", pinned: 'left' },
+    { field: "sektor", width: 150, pinned: 'left' },
+    { field: "crew", width: 100, pinned: 'left' },
     { field: "namaTeknisi", filter: true, pinned: 'left' },
     ...daysArrays.map(day => ({
       field: `day${day}`,
@@ -35,6 +47,9 @@ export const generateColDefs = (selectedMonth) => {
       width: 60,
       valueFormatter: params => statusMap[params.value] || params.value,
       valueParser: params => reverseStatusMap[params.newValue] || params.newValue,
+      cellStyle: params => ({
+        backgroundColor: isCurrentMonth && day === today ? '#ffff99' : statusColors[params.value] || null
+      }),
     })),
     // New fields for status counts
     { 
@@ -42,36 +57,60 @@ export const generateColDefs = (selectedMonth) => {
       headerName: "PAGI", 
       width: 70, 
       pinned: 'right', 
-      valueGetter: params => params.data ? Object.values(params.data).filter(status => status === 'PAGI').length : 0 // Count PAGI
+      valueGetter: params => {
+        const dayKeys = Object.keys(params.data).filter(key => key.startsWith('day'));
+        const pagiCount = dayKeys.map(key => params.data[key]).filter(status => status === 'PAGI').length;
+        console.log("PAGI count:", pagiCount); // Logging hasil perhitungan
+        return pagiCount;
+      }
     },
     { 
       field: "SIANG", 
       headerName: "SIANG", 
       width: 75, 
       pinned: 'right', 
-      valueGetter: params => params.data ? Object.values(params.data).filter(status => status === 'SIANG').length : 0 // Count SIANG
+      valueGetter: params => {
+        const dayKeys = Object.keys(params.data).filter(key => key.startsWith('day'));
+        const siangCount = dayKeys.map(key => params.data[key]).filter(status => status === 'SIANG').length;
+        console.log("SIANG count:", siangCount); // Logging hasil perhitungan
+        return siangCount;
+      }
     },
     { 
       field: "MALAM", 
       headerName: "MALAM", 
       width: 85, 
       pinned: 'right', 
-      valueGetter: params => params.data ? Object.values(params.data).filter(status => status === 'MALAM').length : 0 // Count MALAM
+      valueGetter: params => {
+        const dayKeys = Object.keys(params.data).filter(key => key.startsWith('day'));
+        const malamCount = dayKeys.map(key => params.data[key]).filter(status => status === 'MALAM').length;
+        console.log("MALAM count:", malamCount); // Logging hasil perhitungan
+        return malamCount;
+      } 
     },
     { 
       field: "OFF", 
       headerName: "OFF", 
       width: 65, 
       pinned: 'right', 
-      valueGetter: params => params.data ? Object.values(params.data).filter(status => status === 'OFF').length : 0 // Count OFF
+      valueGetter: params => {
+        const dayKeys = Object.keys(params.data).filter(key => key.startsWith('day'));
+        const offCount = dayKeys.map(key => params.data[key]).filter(status => status === 'OFF').length;
+        console.log("OFF count:", offCount); // Logging hasil perhitungan
+        return offCount;
+      }
     },
     { 
       field: "TOTAL", 
       headerName: "TOTAL", 
       width: 75, 
       pinned: 'right', 
-      valueGetter: params => params.data ? 
-        Object.values(params.data).filter(status => ['PAGI', 'SIANG', 'MALAM'].includes(status)).length : 0 // Count total
+      valueGetter: params => {
+        const dayKeys = Object.keys(params.data).filter(key => key.startsWith('day'));
+        const totalCount = dayKeys.map(key => params.data[key]).filter(status => ['PAGI', 'SIANG', 'MALAM'].includes(status)).length;
+        console.log("TOTAL count:", totalCount); // Logging hasil perhitungan
+        return totalCount;
+      } 
     }
   ];
 };

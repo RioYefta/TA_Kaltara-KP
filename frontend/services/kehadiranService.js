@@ -50,3 +50,16 @@ export const deleteKehadiranData = async (idTeknisi, date) => {
         throw error;
     }
 };
+
+export const updateCrewTeknisi = async (idTeknisi, newCrew) => {
+    try {
+        const response = await axios.post(`${API_ENDPOINTS.TEKNISI}/updateCrewTeknisi`, {
+            id: idTeknisi,
+            crew: newCrew
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating crew:', error);
+        throw error;
+    }
+};

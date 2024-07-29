@@ -21,7 +21,7 @@ function SideNav() {
     return (
         <div className='border shadow-md min-h-screen p-5 flex flex-col'>
             <Image
-                src={'/logo.svg'}
+                src={'/Logo_TA.PNG'}
                 width={180}
                 height={50}
                 alt='logo'

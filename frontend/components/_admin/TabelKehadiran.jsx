@@ -10,10 +10,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useKehadiranData } from '../../hooks/useKehadiranData';
 import { daysInMonth, formatDate } from '../../utils/adminKehadiran/dateUtils'; // Impor formatDate di sini
 import { generateColumnDefs } from '../../utils/adminKehadiran/columnUtils';
-import { updateKehadiranData, deleteKehadiranData } from '../../services/kehadiranService'; // Impor updateKehadiranData di sini
+import { updateKehadiranData, deleteKehadiranData, updateCrewTeknisi } from '../../services/kehadiranService'; // Impor updateCrewTeknisi di sini
 
 function TabelKehadiran({ tabelKehadiran, selectedMonth = moment().format('YYYY-MM'), selectedSektor, selectedIdTeknisi }) {
-  const { data, filteredData, crewOptions, error } = useKehadiranData(selectedMonth, selectedSektor, selectedIdTeknisi);
+  const { data, filteredData, crewOptions, crewData, error } = useKehadiranData(selectedMonth, selectedSektor, selectedIdTeknisi);
   const [colDefs, setColDefs] = useState([]);
   const [rowData, setRowData] = useState([]);
 
@@ -38,22 +38,33 @@ function TabelKehadiran({ tabelKehadiran, selectedMonth = moment().format('YYYY-
     const { data, colDef, newValue } = params;
     const field = colDef.field;
     const id = data.idTeknisi;
-    const day = field.replace('day', '');
-    const date = formatDate(`${selectedMonth}-${day}`, 'YYYY-MM-DD');
-  
-    if (newValue === null || newValue === "") {
-      deleteKehadiranData(id, date)
-        .then(() => toast.success('Data kehadiran berhasil dihapus'))
-        .catch(error => toast.error('Error deleting data'));
+
+    if (field === "crew") {
+      const selectedCrew = crewData.find(crew => crew.kodeCrew === newValue);
+      const idCrew = selectedCrew ? selectedCrew.id : null;
+
+      if (idCrew) {
+        updateCrewTeknisi(id, idCrew)
+          .then(() => toast.success('Crew updated successfully'))
+          .catch(error => toast.error('Error updating crew'));
+      } else {
+        toast.error('Invalid crew selection');
+      }
     } else {
-      updateKehadiranData(id, date, 'status', newValue)
-        .then(() => toast.success('Update successful'))
-        .catch(error => toast.error('Error updating data'));
+      const day = field.replace('day', '');
+      const date = formatDate(`${selectedMonth}-${day}`, 'YYYY-MM-DD');
+
+      if (newValue === null || newValue === "") {
+        deleteKehadiranData(id, date)
+          .then(() => toast.success('Data kehadiran berhasil dihapus'))
+          .catch(error => toast.error('Error deleting data'));
+      } else {
+        updateKehadiranData(id, date, 'status', newValue)
+          .then(() => toast.success('Update successful'))
+          .catch(error => toast.error('Error updating data'));
+      }
     }
   };
-
-  
-  
 
   if (error) return <div>Error: {error}</div>;
 

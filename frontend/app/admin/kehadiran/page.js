@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import MonthSelection from '../../../components/MonthSelection'
 import SektorSelect from '../../../components/SektorSelect'
 import TabelKehadiran from '../../../components/_admin/TabelKehadiran'
+import StatusComponent from '@/components/status'
 import { Button } from '@/components/ui/button'
 import { useAdminValidation } from '../../../hooks/useAdminValidation'; // Import the custom hook
 import LoadingComponent from '../../../components/loadingPage/page';
@@ -52,6 +53,9 @@ function AdminKehadiran({ tabelKehadiran: initialTabelKehadiran, selectedMonth: 
             selectedMonth={searchParams.month}
             selectedSektor={searchParams.sektor}
             selectedIdTeknisi={searchParams.idTeknisi} />
+        </div>
+        <div> 
+          <StatusComponent/> 
         </div>
     </div>
   )

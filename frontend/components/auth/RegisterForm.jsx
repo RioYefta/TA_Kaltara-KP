@@ -20,6 +20,10 @@ const RegisterForm = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        if (password.length < 6) {
+            toast.error("Password harus terdiri dari minimal 6 karakter.", { position: "bottom-center" });
+            return; // Menghentikan eksekusi jika password tidak valid
+        }
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             const user = auth.currentUser;
@@ -32,7 +36,7 @@ const RegisterForm = () => {
             }
             toast.success("User Registered Successfully!", { position: "top-center" });
         } catch (error) {
-            toast.error(error.message, { position: "bottom-center" });
+            toast.error("Email sudah terdaftar! Gunakan email lain.", { position: "bottom-center" });
         }
     };
 

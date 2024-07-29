@@ -1,0 +1,27 @@
+import React from 'react';
+import { statusColors } from '../utils/adminKehadiran/statusUtils'; // Pastikan untuk mengimpor statusColors
+
+const statusInitials = {
+    'PAGI': 'P',
+    'SIANG': 'S',
+    'MALAM': 'M',
+    'OFF': 'O',
+    'IZIN': 'I',
+    'CUTI': 'C',
+    'SAKIT': 'S'
+};
+
+const StatusComponent = () => {
+    return (
+        <div>
+            {Object.keys(statusInitials).map(status => (
+                <div key={status} style={{ display: 'flex', alignItems: 'center', margin: '5px' }}>
+                    <div style={{ width: '20px', height: '20px', backgroundColor: statusColors[status], marginRight: '10px' }} />
+                    <span>{`${statusInitials[status]} - ${status}`}</span>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default StatusComponent;

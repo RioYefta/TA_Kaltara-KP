@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import MonthSelection from '../../../components/MonthSelection'
 import SektorSelect from '../../../components/SektorSelect'
 import TabelKehadiran from '../../../components/_user/TabelKehadiran'
+import StatusComponent from '@/components/status'
 import { Button } from '@/components/ui/button'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
@@ -52,6 +53,11 @@ function UserKehadiran({ tabelKehadiran: initialTabelKehadiran, selectedMonth: i
             selectedSektor={searchParams.sektor}
             selectedIdTeknisi={searchParams.idTeknisi} />
         </div>
+
+        <div>
+          <StatusComponent/>
+        </div>
+        
     </div>
   )
   

@@ -4,7 +4,7 @@ export const sectorMapping = {
     'TANJUNG REDEB': 3,
     'MALINAU': 4,
     'NUNUKAN': 5,
-    'OTHER_SECTOR': 6
+    // Jika ada tambahan sektor disini, tambahkan juga di database SQL
   };
   
   export const statusMap = {
@@ -26,4 +26,13 @@ export const sectorMapping = {
     'C': 'CUTI',
     'SKT': 'SAKIT'
   };
-  
+
+  export const statusColors = {
+    'PAGI': '#ADFF2F',  // Gold
+    'SIANG': '#ADFF2F', // Green Yellow
+    'MALAM': '#1E90FF', // Dodger Blue
+    'OFF': '#D3D3D3',   // Light Gray
+    'IZIN': '#FFA500',  // Orange
+    'CUTI': '#FF4500',  // Orange Red
+    'SAKIT': '#FF0000'  // Red
+  };

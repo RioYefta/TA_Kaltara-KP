@@ -5,6 +5,7 @@ require('dotenv').config();
 const { bot, sendAttendanceData } = require('./telegramBot');
 const getTeknisi = require('./endpoint/teknisi/getTeknisi');
 const postTeknisi = require('./endpoint/teknisi/postTeknisi');
+const updateCrewTeknisi = require('./endpoint/teknisi/updateCrewTeknisi')
 const deleteTeknisiByID = require('./endpoint/teknisi/deleteTeknisiByID');
 const getSektor = require('./endpoint/sektor/getSektor');
 const getKehadiran = require('./endpoint/kehadiran/getKehadiran');
@@ -38,6 +39,7 @@ db.connect((err) => {
 app.get('/teknisi', getTeknisi(db));
 app.post('/teknisi', postTeknisi(db));
 app.delete('/teknisi/:id', deleteTeknisiByID(db));
+app.post('/teknisi/updateCrewTeknisi', updateCrewTeknisi(db));
 app.get('/sektor', getSektor(db));
 app.get('/kehadiran', getKehadiran(db));
 app.get('/admin-kehadiran', getAdminKehadiran(db));

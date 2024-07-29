@@ -83,5 +83,5 @@ export const useKehadiranData = (selectedMonth, selectedSektor, selectedIdTeknis
     setFilteredData(filtered);
   }, [selectedMonth, selectedSektor, selectedIdTeknisi, data, crewOptions]);
 
-  return { data, filteredData, crewOptions, error };
+  return { data, filteredData, crewOptions, crewData, error };
 };
