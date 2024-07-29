@@ -3,7 +3,7 @@ import { House, Users } from 'lucide-react';
 export const menuList = [
     {
         id:1,
-        name:'Jadwal Teknisi',
+        name:'Kehadiran',
         icon:House,
         path:'/user/kehadiran'
       },
