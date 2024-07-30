@@ -11,6 +11,15 @@ import { addMonths } from 'date-fns'
 import moment from 'moment'
 import { Calendar } from "@/components/ui/calendar"
 
+/**
+ * Komponen MonthSelection
+ * Menangani tampilan dan interaksi untuk pemilihan bulan.
+ * 
+ * - Menggunakan useState untuk mengelola bulan yang dipilih.
+ * - Menampilkan kalender untuk memilih bulan dan tahun.
+ * - Mengirimkan bulan yang dipilih ke parent component.
+ */
+
 function MonthSelection({ selectedMonth }) {
     const today = new Date();
     const nextMonths = addMonths(today, 0);

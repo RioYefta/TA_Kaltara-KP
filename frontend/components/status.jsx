@@ -1,6 +1,14 @@
 import React from 'react';
 import { statusColors } from '../utils/adminKehadiran/statusUtils'; // Pastikan untuk mengimpor statusColors
 
+/**
+ * Komponen StatusComponent
+ * Menampilkan status kehadiran dengan warna yang sesuai.
+ * 
+ * - Menggunakan statusColors untuk menentukan warna berdasarkan status.
+ * - Menampilkan inisial dan deskripsi status kehadiran.
+ */
+
 const statusInitials = {
     'PAGI': 'P',
     'SIANG': 'S',

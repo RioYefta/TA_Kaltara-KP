@@ -7,6 +7,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from '../../firebase/config';
 
+/**
+ * Komponen RegisterForm
+ * Menangani tampilan dan interaksi untuk pendaftaran pengguna baru.
+ * 
+ * - Menggunakan useState untuk mengelola input form.
+ * - Mengelola pendaftaran pengguna dengan Firebase Authentication.
+ * - Menyimpan data pengguna ke Firestore setelah pendaftaran.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 const RegisterForm = () => {
     const router = useRouter();
     const [email, setEmail] = useState('');

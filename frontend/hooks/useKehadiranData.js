@@ -4,6 +4,16 @@ import { sectorMapping } from '../utils/adminKehadiran/statusUtils';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 
+/**
+ * Hook useKehadiranData
+ * Mengambil dan mengelola data kehadiran teknisi.
+ * 
+ * - Menggunakan useState untuk menyimpan data kehadiran, crew data, dan error.
+ * - Menggunakan useEffect untuk memanggil fungsi fetchKehadiranData dan fetchCrewData saat komponen di-mount.
+ * - Mengelola pemfilteran data berdasarkan bulan, sektor, dan ID teknisi.
+ * - Mengembalikan objek yang berisi data, filteredData, crewOptions, crewData, dan error.
+ */
+
 export const useKehadiranData = (selectedMonth, selectedSektor, selectedIdTeknisi) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);

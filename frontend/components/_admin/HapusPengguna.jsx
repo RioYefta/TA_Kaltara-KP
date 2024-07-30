@@ -14,6 +14,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
+// components/_admin/HapusPengguna.jsx
+/**
+ * Komponen CustomButtons
+ * Menyediakan tombol untuk menghapus pengguna dengan konfirmasi.
+ * 
+ * - Menggunakan AlertDialog untuk konfirmasi penghapusan.
+ * - Menampilkan tombol untuk menghapus pengguna dan mengonfirmasi tindakan tersebut.
+ * - Mengambil data pengguna dan fungsi untuk menghapus atau memperbarui peran pengguna.
+ */
+
 export const CustomButtons = ({ data, onDeleteUser, onUpdateUserRole }) => {
   const { id, role } = data;
 

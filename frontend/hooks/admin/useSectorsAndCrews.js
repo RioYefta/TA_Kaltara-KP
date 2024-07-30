@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import { fetchSectors, fetchCrews } from '../../services/teknisiService';
 
+/**
+ * Hook useSectorsAndCrews
+ * Mengambil dan mengelola data sektor dan crew.
+ * 
+ * - Menggunakan useState untuk menyimpan data sektor, crew, dan mapping ID.
+ * - Menggunakan useEffect untuk memanggil fungsi fetchSectors dan fetchCrews saat komponen di-mount.
+ * - Mengembalikan objek yang berisi data sektor, crew, dan mapping ID.
+ */
+
 export const useSectorsAndCrews = () => {
     const [sectors, setSectors] = useState([]);
     const [crews, setCrews] = useState([]);

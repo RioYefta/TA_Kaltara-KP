@@ -2,6 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import { fetchSektor } from '../services/sektorService'; // Import the fetchSektor function
 
+/**
+ * Komponen SektorSelect
+ * Menangani tampilan dan interaksi untuk pemilihan sektor.
+ * 
+ * - Menggunakan useEffect untuk mengambil data sektor dari API.
+ * - Mengelola status sektor dengan useState.
+ * - Menyediakan dropdown untuk memilih sektor dan mengirimkan nilai yang dipilih ke parent component.
+ */
+
 function SektorSelect({ selectedSektor }) { // Destructure selectedSektor from props
   const [sektor, setSektor] = useState([]);
 

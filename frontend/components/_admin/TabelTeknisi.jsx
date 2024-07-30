@@ -22,6 +22,16 @@ import { useTeknisiData } from '../../hooks/useTeknisiData';
 import { deleteTeknisi } from '../../services/teknisiService';
 import { generateTeknisiColumnDefs } from '../../utils/adminTeknisi/columnUtils';
 
+/**
+ * Komponen TabelTeknisi
+ * Menangani tampilan dan interaksi untuk pengelolaan data teknisi.
+ * 
+ * - Menggunakan AgGridReact untuk menampilkan data teknisi dalam format tabel.
+ * - Menyediakan fungsi pencarian untuk memfilter teknisi berdasarkan input pengguna.
+ * - Menyediakan dialog konfirmasi untuk menghapus teknisi yang dipilih.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 const pagination = true;
 const paginationPageSize = 15;
 const paginationPageSizeSelector = [25, 50, 100];

@@ -8,6 +8,16 @@ import { useKehadiranData } from '../../hooks/useKehadiranData';
 import { processData } from '../../utils/userKehadiran/dataUtils';
 import { generateColDefs } from '../../utils/userKehadiran/columnUtils';
 
+/**
+ * Komponen TabelKehadiran
+ * Menangani tampilan dan interaksi untuk pengelolaan data kehadiran pengguna.
+ * 
+ * - Menggunakan useState dan useEffect untuk mengelola dan memperbarui data kehadiran.
+ * - Menggunakan AgGridReact untuk menampilkan data dalam format tabel yang dapat diedit.
+ * - Menyediakan fungsi untuk memfilter data berdasarkan bulan, sektor, dan ID teknisi.
+ * - Menampilkan data kehadiran dengan notifikasi untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 function TabelKehadiran({ selectedMonth = moment().format('YYYY-MM'), selectedSektor, selectedIdTeknisi }) {
   const { data, error } = useKehadiranData();
   const [filteredData, setFilteredData] = useState([]);

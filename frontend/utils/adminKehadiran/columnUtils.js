@@ -4,6 +4,19 @@ import { formatDate } from './dateUtils';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 
+/**
+ * Fungsi generateColumnDefs
+ * Menghasilkan definisi kolom untuk tabel kehadiran teknisi.
+ * 
+ * - Menghitung jumlah hari dalam bulan yang dipilih.
+ * - Menghasilkan kolom untuk setiap hari dan status kehadiran.
+ * - Menyediakan kolom untuk menghitung status kehadiran (PAGI, SIANG, MALAM, OFF, TOTAL).
+ * 
+ * @param {Array} crewOptions - Opsi crew yang tersedia untuk pemilihan.
+ * @param {Array} daysArray - Array yang berisi daftar hari dalam bulan yang dipilih.
+ * @param {string} selectedMonth - Bulan yang dipilih dalam format YYYY-MM.
+ * @returns {Array} - Array definisi kolom untuk tabel.
+ */
 export const generateColumnDefs = (crewOptions, daysArray, selectedMonth) => {
   const today = moment().date();
   const isCurrentMonth = moment().isSame(selectedMonth, 'month');

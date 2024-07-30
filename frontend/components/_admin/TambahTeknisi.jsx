@@ -17,6 +17,17 @@ import { useSectorsAndCrews } from '../../hooks/admin/useSectorsAndCrews';
 import { addTeknisi } from '../../services/teknisiService';
 import { handleFileUpload, handleFileSubmit } from '../../utils/adminTeknisi/fileUtils';
 
+/**
+ * Komponen TambahTeknisi
+ * Menangani tampilan dan interaksi untuk menambahkan teknisi baru.
+ * 
+ * - Menggunakan useState untuk mengelola status dialog dan data file.
+ * - Menggunakan useForm untuk mengelola input form dan validasi.
+ * - Menampilkan dialog untuk menambahkan teknisi dengan informasi sektor dan crew.
+ * - Menyediakan fungsi untuk mengupload file dan menambahkan teknisi melalui form.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 function TambahTeknisi() {
     const [open, setOpen] = useState(false);
     const [fileData, setFileData] = useState(null);

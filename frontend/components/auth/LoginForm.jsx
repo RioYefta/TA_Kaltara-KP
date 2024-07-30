@@ -7,6 +7,16 @@ import { auth } from '../../firebase/config';
 import { fetchUserRole } from '../../services/authService';
 import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ * Komponen LoginForm
+ * Menangani tampilan dan interaksi untuk login pengguna.
+ * 
+ * - Menggunakan useState untuk mengelola input email dan password.
+ * - Mengelola proses login dengan Firebase Authentication.
+ * - Mengambil peran pengguna setelah login dan mengarahkan ke halaman yang sesuai.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 const LoginForm = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');

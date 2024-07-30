@@ -5,6 +5,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from '../../firebase/config'; // Import Firestore
 import { collection, query, where, getDocs } from 'firebase/firestore'; // Firestore functions
 
+/**
+ * Komponen ResetPasswordForm
+ * Menangani tampilan dan interaksi untuk reset password pengguna.
+ * 
+ * - Menggunakan useRouter untuk navigasi.
+ * - Mengelola input email dan memvalidasi keberadaan email di Firestore.
+ * - Mengirim email reset password jika email terdaftar.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 const ResetPasswordForm = () => {
     const router = useRouter();
 

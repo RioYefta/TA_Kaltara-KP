@@ -12,6 +12,16 @@ import { daysInMonth, formatDate } from '../../utils/adminKehadiran/dateUtils'; 
 import { generateColumnDefs } from '../../utils/adminKehadiran/columnUtils';
 import { updateKehadiranData, deleteKehadiranData, updateCrewTeknisi } from '../../services/kehadiranService'; // Impor updateCrewTeknisi di sini
 
+/**
+ * Komponen TabelKehadiran
+ * Menangani tampilan dan interaksi untuk pengelolaan data kehadiran teknisi.
+ * 
+ * - Menggunakan useState dan useEffect untuk mengelola dan memperbarui data kehadiran.
+ * - Menggunakan AgGridReact untuk menampilkan data dalam format tabel yang dapat diedit.
+ * - Menyediakan fungsi untuk memperbarui dan menghapus data kehadiran.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 function TabelKehadiran({ tabelKehadiran, selectedMonth = moment().format('YYYY-MM'), selectedSektor, selectedIdTeknisi }) {
   const { data, filteredData, crewOptions, crewData, error } = useKehadiranData(selectedMonth, selectedSektor, selectedIdTeknisi);
   const [colDefs, setColDefs] = useState([]);

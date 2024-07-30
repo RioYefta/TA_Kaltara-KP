@@ -1,6 +1,17 @@
 import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
 
+/**
+ * Fungsi handleFileUpload
+ * Mengelola proses upload file dan parsing data dari file Excel.
+ * 
+ * - Membaca file yang diupload dan mengonversi isinya menjadi format JSON.
+ * - Menyimpan data yang telah diparsing ke dalam state.
+ * - Menampilkan notifikasi saat file berhasil diupload.
+ * 
+ * @param {Event} event - Event upload file.
+ * @param {Function} setFileData - Setter untuk menyimpan data file.
+ */
 export const handleFileUpload = (event, setFileData) => {
     const file = event.target.files[0];
     if (file) {
@@ -30,6 +41,13 @@ export const handleFileUpload = (event, setFileData) => {
     }
 };
 
+/**
+ * Fungsi validateData
+ * Memvalidasi data yang diupload untuk memastikan semua field yang diperlukan terisi.
+ * 
+ * @param {Object} data - Data yang akan divalidasi.
+ * @returns {boolean} - True jika data valid, false jika tidak.
+ */
 export const validateData = (data) => {
     const requiredFields = ['nama', 'sektor', 'kodeCrew'];
     for (const field of requiredFields) {
@@ -40,6 +58,19 @@ export const validateData = (data) => {
     return true;
 };
 
+/**
+ * Fungsi handleFileSubmit
+ * Mengelola proses pengiriman data yang diupload ke server.
+ * 
+ * - Memvalidasi data sebelum mengirim.
+ * - Mengirim data ke server dan menampilkan notifikasi berdasarkan hasil.
+ * 
+ * @param {Array} fileData - Data yang diupload dari file.
+ * @param {Object} crewIdMap - Mapping ID crew.
+ * @param {Function} onSubmit - Fungsi untuk mengirim data.
+ * @param {Function} setFileData - Setter untuk menyimpan data file.
+ * @param {Object} fileInputRef - Referensi ke input file.
+ */
 export const handleFileSubmit = async (fileData, crewIdMap, onSubmit, setFileData, fileInputRef) => {
     if (fileData) {
         try {

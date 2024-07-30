@@ -16,6 +16,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSectors } from '../../hooks/admin/useSectors';
 import { addCrew } from '../../services/crewService';
 
+/**
+ * Komponen TambahCrew
+ * Menangani tampilan dan interaksi untuk menambahkan crew baru.
+ * 
+ * - Menggunakan useState untuk mengelola status dialog.
+ * - Menggunakan useForm untuk mengelola input form dan validasi.
+ * - Menampilkan dialog untuk menambahkan crew dengan informasi sektor.
+ * - Menyediakan fungsi untuk menambahkan crew melalui form.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 function TambahCrew() {
     const [open, setOpen] = useState(false);
     const {

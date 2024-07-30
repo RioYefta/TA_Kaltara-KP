@@ -30,6 +30,17 @@ export const statusColors = {
   'SAKIT': '#FF0000'  // Red
 };
 
+/**
+ * Fungsi generateColDefs
+ * Menghasilkan definisi kolom untuk tabel kehadiran teknisi.
+ * 
+ * - Menghitung jumlah hari dalam bulan yang dipilih.
+ * - Menghasilkan kolom untuk setiap hari dan status kehadiran.
+ * - Menyediakan kolom untuk menghitung status kehadiran (PAGI, SIANG, MALAM, OFF, TOTAL).
+ * 
+ * @param {string} selectedMonth - Bulan yang dipilih dalam format YYYY-MM.
+ * @returns {Array} - Array definisi kolom untuk tabel.
+ */
 export const generateColDefs = (selectedMonth) => {
   const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
   const numberOfDays = daysInMonth(moment(selectedMonth).year(), moment(selectedMonth).month());

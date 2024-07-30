@@ -1,5 +1,19 @@
 import moment from 'moment';
 
+/**
+ * Fungsi processData
+ * Mengolah data kehadiran teknisi berdasarkan bulan, sektor, dan ID teknisi yang dipilih.
+ * 
+ * - Mengelompokkan data berdasarkan ID teknisi, sektor, dan nama teknisi.
+ * - Menghitung status kehadiran untuk setiap hari dalam bulan yang dipilih.
+ * - Mengembalikan data yang telah difilter berdasarkan sektor dan ID teknisi.
+ * 
+ * @param {Array} data - Data kehadiran teknisi.
+ * @param {string} selectedMonth - Bulan yang dipilih dalam format YYYY-MM.
+ * @param {string} selectedSektor - Sektor yang dipilih.
+ * @param {string} selectedIdTeknisi - ID teknisi yang dipilih.
+ * @returns {Array} - Data yang telah diproses dan difilter.
+ */
 export const processData = (data, selectedMonth, selectedSektor, selectedIdTeknisi) => {
   const selectedMonthMoment = moment(selectedMonth);
   const numberOfDays = selectedMonthMoment.daysInMonth();

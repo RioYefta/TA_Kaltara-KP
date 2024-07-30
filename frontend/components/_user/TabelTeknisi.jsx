@@ -10,6 +10,16 @@ import { useTeknisiData } from '../../hooks/useTeknisiData';
 import { processTeknisiData } from '../../utils/userTeknisi/dataUtils';
 import { generateTeknisiColDefs } from '../../utils/userTeknisi/columnUtils';
 
+/**
+ * Komponen TabelTeknisi
+ * Menangani tampilan dan interaksi untuk pengelolaan data teknisi.
+ * 
+ * - Menggunakan useState dan useEffect untuk mengelola dan memperbarui data teknisi.
+ * - Menggunakan AgGridReact untuk menampilkan data dalam format tabel yang dapat diedit.
+ * - Menyediakan fungsi pencarian untuk memfilter teknisi berdasarkan input pengguna.
+ * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
+ */
+
 const pagination = true;
 const paginationPageSize = 15;
 const paginationPageSizeSelector = [25, 50, 100];

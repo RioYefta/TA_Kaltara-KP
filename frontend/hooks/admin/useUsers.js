@@ -3,6 +3,16 @@ import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firesto
 import { db } from "../../firebase/config";
 import { toast } from 'react-toastify';
 
+/**
+ * Hook useUsers
+ * Mengambil dan mengelola data pengguna.
+ * 
+ * - Menggunakan useState untuk menyimpan data pengguna.
+ * - Menggunakan useEffect untuk memanggil fungsi fetchUsers saat komponen di-mount.
+ * - Menyediakan fungsi untuk menghapus dan memperbarui peran pengguna.
+ * - Mengembalikan objek yang berisi data pengguna dan fungsi terkait.
+ */
+
 export const useUsers = () => {
   const [users, setUsers] = useState([]);
 

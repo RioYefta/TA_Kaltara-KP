@@ -9,6 +9,16 @@ import { menuList } from '../../services/adminMenuService';
 import { useUserDetails } from '../../hooks/useUserDetails';
 import { handleLogout } from '../../services/authService';
 
+/**
+ * Komponen SideNav
+ * Menangani tampilan navigasi samping untuk admin.
+ * 
+ * - Menggunakan usePathname untuk mendapatkan jalur saat ini.
+ * - Mengelola status tampilan logout dengan useState.
+ * - Menampilkan logo, menu navigasi, dan informasi pengguna.
+ * - Menyediakan fungsi untuk toggle tampilan logout.
+ */
+
 function SideNav() {
     const path = usePathname();
     const [showLogout, setShowLogout] = useState(false);

@@ -3,6 +3,14 @@ import { useRouter } from 'next/navigation';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase/config';
 import { fetchUserRole } from '../services/roleService';
+/**
+ * Hook useAdminValidation
+ * Memvalidasi status admin pengguna.
+ * 
+ * - Menggunakan useAuthState untuk memantau status autentikasi pengguna.
+ * - Mengambil peran pengguna dan mengarahkan pengguna berdasarkan peran.
+ * - Mengembalikan objek yang berisi loading state, user, dan userRole.
+ */
 
 export const useAdminValidation = () => {
     const [user, loading] = useAuthState(auth);

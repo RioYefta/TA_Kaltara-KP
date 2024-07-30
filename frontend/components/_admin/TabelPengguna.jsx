@@ -1,4 +1,3 @@
-// components/_admin/TabelPengguna.jsx
 'use client'
 import React, { useState, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
@@ -9,6 +8,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUsers } from '../../hooks/admin/useUsers';
 import { getUserColumnDefs } from '../../utils/adminPengguna/userColumn';
+
+/**
+ * Komponen TabelPengguna
+ * Menangani tampilan dan interaksi untuk pengelolaan data pengguna.
+ * 
+ * - Menggunakan AgGridReact untuk menampilkan data pengguna dalam format tabel.
+ * - Menyediakan fungsi pencarian untuk memfilter pengguna berdasarkan nama atau email.
+ * - Menggunakan hook untuk mengelola data pengguna dan fungsi untuk menghapus atau memperbarui peran pengguna.
+ */
 
 function TabelPengguna() {
   const { users, setUsers, deleteUser, updateUserRole } = useUsers();
