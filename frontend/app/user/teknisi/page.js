@@ -6,6 +6,15 @@ import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import LoadingComponent from '../../../components/loadingPage/page';
 
+/**
+ * Komponen UserTeknisi
+ * Menangani tampilan dan interaksi untuk pengelolaan teknisi.
+ * 
+ * - Menggunakan useAuthState untuk memantau status autentikasi pengguna.
+ * - Menampilkan komponen LoadingComponent saat proses loading.
+ * - Mengalihkan pengguna yang tidak terautentikasi ke halaman utama.
+ */
+
 function UserTeknisi() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();

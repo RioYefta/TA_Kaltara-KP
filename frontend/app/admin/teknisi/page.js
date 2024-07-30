@@ -1,10 +1,19 @@
 'use client'
 import React from 'react'
-import { useAdminValidation } from '../../../hooks/useAdminValidation'; // Import the custom hook
+import { useAdminValidation } from '../../../hooks/useAdminValidation';
 import LoadingComponent from '../../../components/loadingPage/page';
 import TambahTeknisi from '../../../components/_admin/TambahTeknisi'
 import TabelTeknisi from '../../../components/_admin/TabelTeknisi'
 import TambahCrew from '../../../components/_admin/TambahCrew';
+
+/**
+ * Komponen AdminTeknisi
+ * Menangani tampilan dan interaksi untuk pengelolaan teknisi oleh admin.
+ * 
+ * - Menggunakan useAdminValidation untuk memvalidasi status pengguna dan peran.
+ * - Menampilkan komponen LoadingComponent saat proses loading.
+ * - Mengalihkan pengguna yang tidak terautentikasi atau bukan admin.
+ */
 
 function AdminTeknisi() {
   const { loading, user, userRole } = useAdminValidation(); // Use the custom hook

@@ -7,6 +7,15 @@ import { fetchUserRole } from '../services/authService';
 import LoadingComponent from '../components/loadingPage/page';
 import LoginForm from '../components/auth/LoginForm';
 
+/**
+ * Komponen Login
+ * Menangani proses login pengguna dan pengalihan berdasarkan status autentikasi.
+ * 
+ * - Menggunakan useAuthState untuk memantau status autentikasi pengguna.
+ * - Jika pengguna sudah terautentikasi, ambil peran pengguna dan alihkan ke halaman yang sesuai.
+ * - Tampilkan komponen LoadingComponent saat proses loading.
+ */
+
 export default function Login() {
   const router = useRouter();
   const [user, loading] = useAuthState(auth);

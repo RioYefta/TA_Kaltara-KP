@@ -10,6 +10,17 @@ import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import LoadingComponent from '../../../components/loadingPage/page';
 
+/**
+ * Komponen UserKehadiran
+ * Menangani tampilan dan interaksi untuk pengelolaan kehadiran teknisi.
+ * 
+ * - Menggunakan useState untuk mengelola status bulan, sektor, dan ID teknisi yang dipilih.
+ * - Menggunakan useAuthState untuk memantau status autentikasi pengguna.
+ * - Menampilkan komponen LoadingComponent saat proses loading.
+ * - Mengalihkan pengguna yang tidak terautentikasi ke halaman utama.
+ * - Menyediakan fungsi pencarian untuk memperbarui parameter pencarian berdasarkan input pengguna.
+ */
+
 function UserKehadiran({ tabelKehadiran: initialTabelKehadiran, selectedMonth: initialSelectedMonth, selectedSektor: initialSelectedSektor }) {
 
   const [selectedMonth, setSelectedMonth] = useState(initialSelectedMonth);

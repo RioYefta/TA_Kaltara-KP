@@ -1,8 +1,17 @@
 'use client'
 import React from 'react'
-import { useAdminValidation } from '../../../hooks/useAdminValidation'; // Import the custom hook
+import { useAdminValidation } from '../../../hooks/useAdminValidation';
 import LoadingComponent from '../../../components/loadingPage/page';
 import TabelPengguna from '../../../components/_admin/TabelPengguna';
+
+/**
+ * Komponen Pengguna
+ * Menangani tampilan dan interaksi untuk pengelolaan pengguna oleh admin.
+ * 
+ * - Menggunakan useAdminValidation untuk memvalidasi status pengguna dan peran.
+ * - Menampilkan komponen LoadingComponent saat proses loading.
+ * - Mengalihkan pengguna yang tidak terautentikasi atau bukan admin.
+ */
 
 
 function Pengguna() {

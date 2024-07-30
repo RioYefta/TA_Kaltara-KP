@@ -1,12 +1,22 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import MonthSelection from '../../../components/MonthSelection'
 import SektorSelect from '../../../components/SektorSelect'
 import TabelKehadiran from '../../../components/_admin/TabelKehadiran'
 import StatusComponent from '@/components/status'
 import { Button } from '@/components/ui/button'
-import { useAdminValidation } from '../../../hooks/useAdminValidation'; // Import the custom hook
+import { useAdminValidation } from '../../../hooks/useAdminValidation';
 import LoadingComponent from '../../../components/loadingPage/page';
+
+/**
+ * Komponen AdminKehadiran
+ * Menangani tampilan dan interaksi untuk pengelolaan tabel kehadiran teknnisi.
+ * 
+ * - Menggunakan useState untuk mengelola status bulan, sektor, dan ID teknisi yang dipilih.
+ * - Menggunakan useAdminValidation untuk memvalidasi status pengguna dan peran.
+ * - Menampilkan komponen LoadingComponent saat proses loading.
+ * - Menyediakan fungsi pencarian untuk memperbarui parameter pencarian berdasarkan input pengguna.
+ */
 
 function AdminKehadiran({ tabelKehadiran: initialTabelKehadiran, selectedMonth: initialSelectedMonth, selectedSektor: initialSelectedSektor }) {
 
