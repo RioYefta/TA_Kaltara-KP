@@ -13,10 +13,10 @@ const statusInitials = {
     'PAGI': 'P',
     'SIANG': 'S',
     'MALAM': 'M',
-    'OFF': 'O',
+    'OFF': 'OFF',
     'IZIN': 'I',
     'CUTI': 'C',
-    'SAKIT': 'S'
+    'SAKIT': 'SKT'
 };
 
 const StatusComponent = () => {

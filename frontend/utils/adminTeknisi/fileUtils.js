@@ -70,18 +70,24 @@ export const validateData = (data) => {
  * @param {Function} onSubmit - Fungsi untuk mengirim data.
  * @param {Function} setFileData - Setter untuk menyimpan data file.
  * @param {Object} fileInputRef - Referensi ke input file.
+ * @param {Object} sectorNameMap - Mapping nama sektor ke ID sektor.
  */
-export const handleFileSubmit = async (fileData, crewIdMap, onSubmit, setFileData, fileInputRef) => {
+export const handleFileSubmit = async (fileData, crewIdMap, onSubmit, setFileData, fileInputRef, sectorNameMap) => {
     if (fileData) {
         try {
             for (const data of fileData) {
                 if (validateData(data)) {
                     const idCrew = crewIdMap[data.kodeCrew];
+                    const sektor = sectorNameMap[data.sektor];
                     if (!idCrew) {
                         toast.error(`Kode Crew ${data.kodeCrew} tidak valid.`);
                         return;
                     }
-                    const payload = { ...data, sektor: parseInt(data.sektor), idCrew: idCrew };
+                    if (!sektor) {
+                        toast.error(`Nama Sektor ${data.sektor} tidak valid.`);
+                        return;
+                    }
+                    const payload = { ...data, sektor: sektor, idCrew: idCrew };
                     delete payload.kodeCrew;
                     await onSubmit(payload, false, true);
                 } else {

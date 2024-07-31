@@ -70,6 +70,11 @@ function TambahTeknisi() {
         toast.error(`Error fetching sectors or crews: ${error}`);
     }
 
+    const sectorNameMap = sectors.reduce((map, sector) => {
+        map[sector.namaSektor] = sector.id;
+        return map;
+    }, {});
+
     return (
         <div className='flex flex-col gap-4 p-2'>
             <ToastContainer />
@@ -136,7 +141,7 @@ function TambahTeknisi() {
                         Pilih File (*csv, xls, xlsx)
                     </label>
                 </div>
-                <Button className="md:mt-0 mt-2 md:ml-4" onClick={() => handleFileSubmit(fileData, crewIdMap, onSubmit, setFileData, fileInputRef)}>Submit</Button>
+                <Button className="md:mt-0 mt-2 md:ml-4" onClick={() => handleFileSubmit(fileData, crewIdMap, onSubmit, setFileData, fileInputRef, sectorNameMap)}>Submit</Button>
             </div>
         </div>
     );
