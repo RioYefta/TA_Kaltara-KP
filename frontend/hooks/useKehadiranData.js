@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchKehadiranData, fetchCrewData } from '../services/kehadiranService';
+import { fetchKehadiranData } from '../services/kehadiranService';
+import { fetchCrewData } from '../services/crewService';
 import { sectorMapping } from '../utils/adminKehadiran/statusUtils';
 import { toast } from 'react-toastify';
 import moment from 'moment';

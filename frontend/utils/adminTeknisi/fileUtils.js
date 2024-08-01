@@ -1,17 +1,6 @@
 import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
 
-/**
- * Fungsi handleFileUpload
- * Mengelola proses upload file dan parsing data dari file Excel.
- * 
- * - Membaca file yang diupload dan mengonversi isinya menjadi format JSON.
- * - Menyimpan data yang telah diparsing ke dalam state.
- * - Menampilkan notifikasi saat file berhasil diupload.
- * 
- * @param {Event} event - Event upload file.
- * @param {Function} setFileData - Setter untuk menyimpan data file.
- */
 export const handleFileUpload = (event, setFileData) => {
     const file = event.target.files[0];
     if (file) {
@@ -41,13 +30,6 @@ export const handleFileUpload = (event, setFileData) => {
     }
 };
 
-/**
- * Fungsi validateData
- * Memvalidasi data yang diupload untuk memastikan semua field yang diperlukan terisi.
- * 
- * @param {Object} data - Data yang akan divalidasi.
- * @returns {boolean} - True jika data valid, false jika tidak.
- */
 export const validateData = (data) => {
     const requiredFields = ['nama', 'sektor', 'kodeCrew'];
     for (const field of requiredFields) {
@@ -58,36 +40,28 @@ export const validateData = (data) => {
     return true;
 };
 
-/**
- * Fungsi handleFileSubmit
- * Mengelola proses pengiriman data yang diupload ke server.
- * 
- * - Memvalidasi data sebelum mengirim.
- * - Mengirim data ke server dan menampilkan notifikasi berdasarkan hasil.
- * 
- * @param {Array} fileData - Data yang diupload dari file.
- * @param {Object} crewIdMap - Mapping ID crew.
- * @param {Function} onSubmit - Fungsi untuk mengirim data.
- * @param {Function} setFileData - Setter untuk menyimpan data file.
- * @param {Object} fileInputRef - Referensi ke input file.
- * @param {Object} sectorNameMap - Mapping nama sektor ke ID sektor.
- */
 export const handleFileSubmit = async (fileData, crewIdMap, onSubmit, setFileData, fileInputRef, sectorNameMap) => {
     if (fileData) {
+        let hasInvalidCrew = false;
+        const updatedFileData = [...fileData];
+        
         try {
-            for (const data of fileData) {
+            for (let i = 0; i < updatedFileData.length; i++) {
+                const data = updatedFileData[i];
                 if (validateData(data)) {
                     const idCrew = crewIdMap[data.kodeCrew];
                     const sektor = sectorNameMap[data.sektor];
                     if (!idCrew) {
-                        toast.error(`Kode Crew ${data.kodeCrew} tidak valid.`);
-                        return;
+                        hasInvalidCrew = true;
+                        updatedFileData[i].invalidCrew = true;
+                    } else {
+                        updatedFileData[i].invalidCrew = false;
                     }
                     if (!sektor) {
                         toast.error(`Nama Sektor ${data.sektor} tidak valid.`);
                         return;
                     }
-                    const payload = { ...data, sektor: sektor, idCrew: idCrew };
+                    const payload = { ...data, sektor: sektor, idCrew: idCrew || null };
                     delete payload.kodeCrew;
                     await onSubmit(payload, false, true);
                 } else {
@@ -95,8 +69,12 @@ export const handleFileSubmit = async (fileData, crewIdMap, onSubmit, setFileDat
                     return;
                 }
             }
-            toast.success("Semua data dari file berhasil ditambahkan!");
-            setFileData(null);
+            if (hasInvalidCrew) {
+                toast.warning("Beberapa teknisi yang diinput, memiliki crew yang belum tersedia di database.");
+            } else {
+                toast.success("Semua data dari file berhasil ditambahkan!");
+            }
+            setFileData(updatedFileData);
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }

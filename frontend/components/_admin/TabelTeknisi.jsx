@@ -19,18 +19,8 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTeknisiData } from '../../hooks/useTeknisiData';
-import { deleteTeknisi } from '../../services/teknisiService';
+import { deleteTeknisi, updateNamaTeknisi } from '../../services/teknisiService';
 import { generateTeknisiColumnDefs } from '../../utils/adminTeknisi/columnUtils';
-
-/**
- * Komponen TabelTeknisi
- * Menangani tampilan dan interaksi untuk pengelolaan data teknisi.
- * 
- * - Menggunakan AgGridReact untuk menampilkan data teknisi dalam format tabel.
- * - Menyediakan fungsi pencarian untuk memfilter teknisi berdasarkan input pengguna.
- * - Menyediakan dialog konfirmasi untuk menghapus teknisi yang dipilih.
- * - Menampilkan notifikasi menggunakan toast untuk setiap tindakan yang berhasil atau gagal.
- */
 
 const pagination = true;
 const paginationPageSize = 15;
@@ -40,9 +30,21 @@ function TabelTeknisi() {
   const { data, error } = useTeknisiData();
   const [selectedIds, setSelectedIds] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [colDefs, setColDefs] = useState(generateTeknisiColumnDefs());
   const [rowData, setRowData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+
+  // Fungsi untuk menangani perubahan nilai sel
+  const handleCellValueChanged = async (params) => {
+    const { id, nama } = params.data;
+    try {
+      await updateNamaTeknisi(id, nama);
+      toast.success("Nama teknisi berhasil diperbarui!");
+    } catch (error) {
+      toast.error("Gagal memperbarui nama teknisi.");
+    }
+  };
+
+  const [colDefs, setColDefs] = useState(generateTeknisiColumnDefs(handleCellValueChanged));
 
   useEffect(() => {
     if (error) {
@@ -51,7 +53,10 @@ function TabelTeknisi() {
   }, [error]);
 
   useEffect(() => {
-    setRowData(data);
+    setRowData(data.map(row => ({
+      ...row,
+      invalidCrew: !row.idCrew
+    })));
   }, [data]);
 
   const deleteSelectedRecords = async () => {
@@ -70,6 +75,13 @@ function TabelTeknisi() {
     const selectedNodes = event.api.getSelectedNodes();
     const selectedIds = selectedNodes.map(node => node.data.id);
     setSelectedIds(selectedIds);
+  };
+
+  const cellRenderer = (params) => {
+    if (params.colDef.field === 'crew' && !params.value) {
+      return <span style={{ backgroundColor: '#f8d7da', display: 'inline-block', width: '100%', height: '100%' }}>{params.value}</span>;
+    }
+    return params.value;
   };
 
   return (
@@ -108,7 +120,10 @@ function TabelTeknisi() {
       >
         <AgGridReact
           rowData={rowData}
-          columnDefs={colDefs}
+          columnDefs={colDefs.map(col => ({
+            ...col,
+            cellRenderer: col.field === 'crew' ? cellRenderer : null
+          }))}
           quickFilterText={searchInput}
           pagination={pagination}
           paginationPageSize={paginationPageSize}

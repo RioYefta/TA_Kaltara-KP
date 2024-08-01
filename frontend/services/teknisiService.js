@@ -73,3 +73,13 @@ export const addTeknisi = async (data) => {
         throw error;
     }
 };
+
+export const updateNamaTeknisi = async (id, nama) => {
+    try {
+        const response = await axios.put(`${API_ENDPOINTS.TEKNISI}/${id}`, { nama });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating nama teknisi:', error);
+        throw error;
+    }
+};

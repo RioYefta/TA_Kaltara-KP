@@ -10,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useKehadiranData } from '../../hooks/useKehadiranData';
 import { daysInMonth, formatDate } from '../../utils/adminKehadiran/dateUtils'; // Impor formatDate di sini
 import { generateColumnDefs } from '../../utils/adminKehadiran/columnUtils';
-import { updateKehadiranData, deleteKehadiranData, updateCrewTeknisi } from '../../services/kehadiranService'; // Impor updateCrewTeknisi di sini
+import { updateKehadiranData, deleteKehadiranData } from '../../services/kehadiranService';
+import { updateCrewTeknisi } from '../../services/crewService';
 
 /**
  * Komponen TabelKehadiran

@@ -15,20 +15,6 @@ export const fetchKehadiranData = async () => {
     }
 };
 
-export const fetchCrewData = async () => {
-    try {
-        const response = await fetch(API_ENDPOINTS.CREW);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching crew data:', error);
-        throw error;
-    }
-};
-
 export const updateKehadiranData = async (idTeknisi, date, field, newValue) => {
     try {
         await axios.post(API_ENDPOINTS.KEHADIRAN, {
@@ -47,19 +33,6 @@ export const deleteKehadiranData = async (idTeknisi, date) => {
         });
     } catch (error) {
         console.error('Error deleting attendance data:', error);
-        throw error;
-    }
-};
-
-export const updateCrewTeknisi = async (idTeknisi, newCrew) => {
-    try {
-        const response = await axios.post(`${API_ENDPOINTS.TEKNISI}/updateCrewTeknisi`, {
-            id: idTeknisi,
-            crew: newCrew
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error updating crew:', error);
         throw error;
     }
 };

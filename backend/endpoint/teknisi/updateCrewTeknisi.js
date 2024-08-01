@@ -1,11 +1,14 @@
 module.exports = (db) => (req, res) => {
     const { id, crew } = req.body;
-    const query = 'UPDATE teknisi SET idCrew = ? WHERE id = ?';
-    db.query(query, [crew, id], (error, results) => {
-        if (error) {
-            console.error('Error updating crew:', error);
-            return res.status(500).json({ error: 'Error updating crew' });
+
+    const sqlUpdateCrewTeknisi = "UPDATE teknisi SET idCrew = ? WHERE id = ?";
+    const values = [crew, id];
+
+    db.query(sqlUpdateCrewTeknisi, values, (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            return res.status(500).json({ message: 'Error inside server', error: err.message });
         }
-        res.status(200).json({ message: 'Crew updated successfully' });
+        return res.json({ message: 'Crew teknisi berhasil diperbarui', result });
     });
 };
